@@ -1,0 +1,20 @@
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        map = dict()
+
+        for s in strs:
+            count = [[chr(i), 0] for i in range(ord("a"), ord("z") + 1)]
+
+            for ch in s:
+                count[ord(ch) - 97][1] += 1
+
+            count = [tuple(count[i]) for i in range(len(count))]
+            count = tuple(count)
+
+            if count in map:
+                map[count].append(s)
+
+            else:
+                map[count] = [s]
+
+        return list(map.values())
